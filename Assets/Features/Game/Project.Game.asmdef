@@ -1,0 +1,16 @@
+{
+    "name": "Project.Game",
+    "rootNamespace": "Project",
+    "references": [
+        "GUID:f103adaea5c9b8b4ba23a6da64033642"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
