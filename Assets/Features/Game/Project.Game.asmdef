@@ -2,7 +2,8 @@
     "name": "Project.Game",
     "rootNamespace": "Project",
     "references": [
-        "GUID:f103adaea5c9b8b4ba23a6da64033642"
+        "GUID:f103adaea5c9b8b4ba23a6da64033642",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
