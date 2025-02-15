@@ -103,19 +103,19 @@ TextureImporter:
       name: Spritesheet_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 215
-        width: 37
-        height: 37
+        x: 1
+        y: 220
+        width: 34
+        height: 33
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape:
-      - - {x: -17.5, y: -17.5}
-        - {x: 17.5, y: -17.5}
-        - {x: -0.083559036, y: 17.5}
+      - - {x: -16, y: -15.5}
+        - {x: 16, y: -15.5}
+        - {x: 0.24712181, y: 15.5}
       tessellationDetail: 0
       bones: []
       spriteID: 59bfc19e085b1d770800000000000000
