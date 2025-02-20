@@ -12,8 +12,8 @@ namespace Project
 		[SerializeField] private float _minSize = 0.5f;
 		[SerializeField] private float _maxSize = 1.5f;
 		[SerializeField] private float _speed = 50;
-		[Min(1)]
-		[SerializeField] private float _lifetime = 30;
+
+		private bool _enteredGameArea;
 
 		public float Size { get => _size; set => _size = value; }
 		public float MinSize => _minSize;
@@ -35,7 +35,17 @@ namespace Project
 			transform.localScale = Vector3.one * _size;
 
 			_rigidbody.mass = _size;
-			Destroy(gameObject, _lifetime);
+		}
+
+		private void OnBecameVisible()
+		{
+			_enteredGameArea = true;
+		}
+
+		private void OnBecameInvisible()
+		{
+			if (_enteredGameArea)
+				Destroy(gameObject);
 		}
 
 		public void SetTrajectory(Vector2 direction)
