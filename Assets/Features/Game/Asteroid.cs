@@ -35,6 +35,8 @@ namespace Project
 			transform.localScale = Vector3.one * _size;
 
 			_rigidbody.mass = _size;
+
+			Invoke(nameof(CheckShouldDestroy), 30);
 		}
 
 		private void OnBecameVisible()
@@ -51,6 +53,15 @@ namespace Project
 		public void SetTrajectory(Vector2 direction)
 		{
 			_rigidbody.AddForce(direction * _speed);
+		}
+
+		private void CheckShouldDestroy()
+		{
+			if (_enteredGameArea) return;
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+			Debug.Log("FORCE DESTROY ASTEROID (after 30 seconds never entered the game area)");
+#endif
+			Destroy(gameObject);
 		}
 	}
 }
