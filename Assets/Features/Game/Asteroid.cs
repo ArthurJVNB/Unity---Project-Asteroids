@@ -28,15 +28,7 @@ namespace Project
 
 		private void Start()
 		{
-			if (_sprites?.Length > 0)
-				_spriteRenderer.sprite = _sprites[Random.Range(0, _sprites.Length)];
-
-			transform.eulerAngles = new Vector3(0, 0, Random.Range(0, 360));
-			transform.localScale = Vector3.one * _size;
-
-			_rigidbody.mass = _size;
-
-			Invoke(nameof(CheckShouldDestroy), 30);
+			Setup();
 		}
 
 		private void OnBecameVisible()
@@ -50,9 +42,33 @@ namespace Project
 				Destroy(gameObject);
 		}
 
+		private void OnCollisionEnter2D(Collision2D collision)
+		{
+			if (!collision.gameObject.TryGetComponent(out Bullet _)) return;
+			if (_size > _minSize)
+			{
+				CreateSplit();
+				CreateSplit();
+			}
+			Destroy(gameObject);
+		}
+
 		public void SetTrajectory(Vector2 direction)
 		{
 			_rigidbody.AddForce(direction * _speed);
+		}
+
+		private void Setup()
+		{
+			if (_sprites?.Length > 0)
+				_spriteRenderer.sprite = _sprites[Random.Range(0, _sprites.Length)];
+
+			transform.eulerAngles = new Vector3(0, 0, Random.Range(0, 360));
+			transform.localScale = Vector3.one * _size;
+
+			_rigidbody.mass = _size;
+
+			Invoke(nameof(CheckShouldDestroy), 30);
 		}
 
 		private void CheckShouldDestroy()
@@ -62,6 +78,14 @@ namespace Project
 			Debug.Log("FORCE DESTROY ASTEROID (after 30 seconds never entered the game area)");
 #endif
 			Destroy(gameObject);
+		}
+
+		private void CreateSplit()
+		{
+			var asteroid = Instantiate(this, transform.position, transform.rotation);
+			asteroid.Size = _size * .5f;
+			asteroid.Speed = _speed * 1.5f;
+			asteroid.SetTrajectory(Random.insideUnitCircle.normalized);
 		}
 	}
 }
