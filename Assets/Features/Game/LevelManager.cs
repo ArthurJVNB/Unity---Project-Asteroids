@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -35,14 +36,14 @@ namespace Project
 		{
 			Debug.Log("Spaceship died");
 			DecreaseLife();
-			HandleSpacheshipDeathAsync(spaceship);
+			StartCoroutine(HandleSpacheshipDeathRoutine(spaceship));
 		}
 
-		private async Task HandleSpacheshipDeathAsync(Spaceship spaceship)
+		private IEnumerator HandleSpacheshipDeathRoutine(Spaceship spaceship)
 		{
 			spaceship.Disable();
-			if (_isGameOver) return;
-			await Task.Delay((int)(1000 * _timeToRespawn));
+			if (_isGameOver) yield break;
+			yield return new WaitForSeconds(_timeToRespawn);
 			spaceship.Enable();
 			spaceship.StartGraceTimeAfterSpawn();
 		}
