@@ -1,10 +1,9 @@
 fileFormatVersion: 2
-guid: 6c09351e8b7e70241be2666375144430
+guid: 61878c6b35ddb1a4fb176c033bb71711
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - _rigidbody: {instanceID: 0}
   - _spaceshipDiedEvent: {fileID: 11400000, guid: 23d18b2f4ccd7764a8d1b1e80c7bb4ea, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}

@@ -13,6 +13,7 @@ namespace Project
 		[SerializeField] private Rigidbody2D _rigidbody;
 		[SerializeField] private float _thrustSpeed = 1;
 		[SerializeField] private float _turnSpeed = 1;
+		[SerializeField] private SpaceshipEventData _spaceshipDiedEvent;
 
 		private float _previousThrust;
 		[ShowNonSerializedField]
@@ -34,6 +35,12 @@ namespace Project
 
 			if (_turnDirection != 0)
 				_rigidbody.AddTorque(_turnDirection * _turnSpeed);
+		}
+
+		private void OnCollisionEnter2D(Collision2D collision)
+		{
+			if (!collision.gameObject.TryGetComponent(out Asteroid _)) return;
+			_spaceshipDiedEvent.Invoke(this);
 		}
 
 		public void OnMove(InputValue value)
