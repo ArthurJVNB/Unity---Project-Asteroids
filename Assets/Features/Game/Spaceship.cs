@@ -38,7 +38,6 @@ namespace Project
 
 		public void OnMove(InputValue value)
 		{
-			Debug.Log("OnMove " + value.Get<Vector2>());
 			_thurst = value.Get<Vector2>().y switch
 			{
 				> 0 => 1,
