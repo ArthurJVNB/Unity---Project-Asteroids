@@ -940,6 +940,9 @@ MonoBehaviour:
   _rigidbody: {fileID: 1178214594}
   _thrustSpeed: 1
   _turnSpeed: 0.05
+  _graceTimeAfterSpawn: 3
+  _spaceshipDiedEvent: {fileID: 11400000, guid: 23d18b2f4ccd7764a8d1b1e80c7bb4ea, type: 2}
+  _spaceshipGraceTimeChangedEvent: {fileID: 11400000, guid: 44a2f913deaa2ce4d8ae071a222b246d, type: 2}
 --- !u!114 &1178214599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -984,6 +987,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionToShoot: {fileID: 577411843}
   _prefab: {fileID: -4400923225993140678, guid: b06231c8aefc20c4484f3fa33333bad5, type: 3}
+--- !u!1 &1302032603
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1302032605}
+  - component: {fileID: 1302032604}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1302032604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302032603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61878c6b35ddb1a4fb176c033bb71711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timeToRespawn: 1
+  _lifes: 3
+  _spaceshipDiedEvent: {fileID: 11400000, guid: 23d18b2f4ccd7764a8d1b1e80c7bb4ea, type: 2}
+  _lifesChangedEvent: {fileID: 11400000, guid: 3ddc8643237673745ba240134a3bd4c0, type: 2}
+--- !u!4 &1302032605
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302032603}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1793648125
 GameObject:
   m_ObjectHideFlags: 0
@@ -1366,3 +1417,4 @@ SceneRoots:
   - {fileID: 844823222}
   - {fileID: 1178214597}
   - {fileID: 2076040430}
+  - {fileID: 1302032605}
