@@ -11,7 +11,7 @@ namespace Project
 		[Min(0)]
 		[SerializeField] private int _lifes = 3;
 
-		[Header("Events")]
+		[Header("Events Listened")]
 		[SerializeField] private SpaceshipEventData _spaceshipDiedEvent;
 		[SerializeField] private IntEventData _lifesChangedEvent;
 
