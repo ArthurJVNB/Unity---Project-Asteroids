@@ -15,9 +15,10 @@ namespace Project
 		[SerializeField] private float _turnSpeed = 1;
 		[SerializeField] private float _graceTimeAfterSpawn = 3;
 
-		[Header("Events")]
+		[Header("Events Invoked")]
 		[SerializeField] private SpaceshipEventData _spaceshipDiedEvent;
 		[SerializeField] private SpaceshipEventData _spaceshipGraceTimeChangedEvent;
+		[SerializeField] private Collision2DEventData _spaceshipCollidedAsteroidEvent;
 
 		private float _previousThrust;
 		[ShowNonSerializedField]
@@ -50,6 +51,7 @@ namespace Project
 		{
 			if (_isGraceTime) return;
 			if (!collision.gameObject.TryGetComponent(out Asteroid _)) return;
+			_spaceshipCollidedAsteroidEvent.Invoke(collision);
 			_spaceshipDiedEvent.Invoke(this);
 		}
 

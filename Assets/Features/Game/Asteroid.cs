@@ -12,6 +12,10 @@ namespace Project
 		[SerializeField] private float _minSize = 0.5f;
 		[SerializeField] private float _maxSize = 1.5f;
 		[SerializeField] private float _speed = 50;
+		[Header("Events Invoked")]
+		[SerializeField] private Collision2DEventData _asteroidCollidedBulletEvent;
+		[SerializeField] private Collision2DEventData _asteroidCollidedAsteroidEvent;
+		[SerializeField] private Collision2DEventData _asteroidExplodedEvent;
 
 		private bool _enteredGameArea;
 
@@ -44,13 +48,27 @@ namespace Project
 
 		private void OnCollisionEnter2D(Collision2D collision)
 		{
-			if (!collision.gameObject.TryGetComponent(out Bullet _)) return;
-			if (_size > _minSize)
+			if (collision.gameObject.TryGetComponent(out Asteroid _))
 			{
-				CreateSplit();
-				CreateSplit();
+				_asteroidCollidedAsteroidEvent.Invoke(collision);
+				return;
 			}
-			Destroy(gameObject);
+
+			if (collision.gameObject.TryGetComponent(out Bullet _))
+			{
+				if (_size > _minSize)
+				{
+					CreateSplit();
+					CreateSplit();
+					_asteroidCollidedBulletEvent.Invoke(collision);
+				}
+				else
+				{
+					_asteroidExplodedEvent.Invoke(collision);
+				}
+				Destroy(gameObject);
+				return;
+			}
 		}
 
 		public void SetTrajectory(Vector2 direction)
