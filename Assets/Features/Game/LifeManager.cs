@@ -1,11 +1,9 @@
-using System;
 using System.Collections;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Project
 {
-	public class LevelManager : MonoBehaviour
+	public class LifeManager : MonoBehaviour
 	{
 		[SerializeField] private float _timeToRespawn = 1;
 		[Min(0)]
