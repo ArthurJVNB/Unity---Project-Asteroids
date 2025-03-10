@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f92fd04673af85d438a2096c2fc2e789, type: 3}
-  m_Name: ScoreChangedTotalIntEventData
+  m_Script: {fileID: 11500000, guid: 52e2abf33c2dd6d49aae6a35d0409690, type: 3}
+  m_Name: ScoreChangedEventData
   m_EditorClassIdentifier: 
