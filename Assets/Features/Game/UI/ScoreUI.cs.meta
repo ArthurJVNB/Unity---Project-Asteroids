@@ -4,7 +4,9 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - _scoreChangedTotalEvent: {fileID: 11400000, guid: e9fcd964047219a43ac2079d5fa65bd5, type: 2}
+  - _scoreText: {instanceID: 0}
+  - _prefabScorePopupText: {fileID: 8910926525657960104, guid: 345b778898f361648a58fcb4d3c93414, type: 3}
+  - _scoreChangedEvent: {fileID: 11400000, guid: 84142707025e14748942a0726c73d120, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
