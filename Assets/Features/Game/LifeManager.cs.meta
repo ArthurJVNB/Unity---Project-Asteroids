@@ -5,6 +5,8 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - _spaceshipDiedEvent: {fileID: 11400000, guid: 23d18b2f4ccd7764a8d1b1e80c7bb4ea, type: 2}
+  - _lifesChangedEvent: {fileID: 11400000, guid: 3ddc8643237673745ba240134a3bd4c0, type: 2}
+  - _gameOverEvent: {fileID: 11400000, guid: 704a9785048e01240b441deffae06ae1, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

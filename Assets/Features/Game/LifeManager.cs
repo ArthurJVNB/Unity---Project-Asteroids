@@ -12,6 +12,7 @@ namespace Project
 		[Header("Events Listened")]
 		[SerializeField] private SpaceshipEventData _spaceshipDiedEvent;
 		[SerializeField] private IntEventData _lifesChangedEvent;
+		[SerializeField] private EventData _gameOverEvent;
 
 		private bool _isGameOver;
 
@@ -58,8 +59,11 @@ namespace Project
 
 		private void GameOver()
 		{
+#if UNITY_EDITOR
 			Debug.Log("<color=red>GAME OVER</color>");
+#endif
 			_isGameOver = true;
+			_gameOverEvent.Invoke();
 		}
 	}
 }
