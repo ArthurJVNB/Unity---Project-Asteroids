@@ -57,6 +57,7 @@ MonoBehaviour:
   _asteroidCollidedBulletEvent: {fileID: 11400000, guid: 410968cb0107683458050e651c04c7a1, type: 2}
   _asteroidCollidedAsteroidEvent: {fileID: 11400000, guid: 86629b5755bbb2e45b699c6c3aea594e, type: 2}
   _asteroidExplodedEvent: {fileID: 11400000, guid: 1cf5098e03460c34691086501857b278, type: 2}
+  _asteroidDestroyedData: {fileID: 11400000, guid: a18b456477e539b488de638340f5c27b, type: 2}
 --- !u!212 &742809015173827202
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -50,8 +50,10 @@ namespace Project
 			fx.transform.localScale *= collision.relativeVelocity.magnitude;
 			fx.Play(true);
 
+#if UNITY_EDITOR
 			//Debug.DrawLine(contact.point, (contact.point + contact.normal), Color.red, 1);
 			Debug.DrawLine(collision.contacts[0].point, collision.contacts[0].point + (Vector2)(rotation * Vector2.one), Color.red, 1);
+#endif
 		}
 
 		private void AsteroidExploded_Event(Collision2D collision)

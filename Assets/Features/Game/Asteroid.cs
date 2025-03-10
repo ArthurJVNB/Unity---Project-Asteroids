@@ -16,6 +16,7 @@ namespace Project
 		[SerializeField] private Collision2DEventData _asteroidCollidedBulletEvent;
 		[SerializeField] private Collision2DEventData _asteroidCollidedAsteroidEvent;
 		[SerializeField] private Collision2DEventData _asteroidExplodedEvent;
+		[SerializeField] private AsteroidEventData _asteroidDestroyedData;
 
 		private bool _enteredGameArea;
 
@@ -66,6 +67,7 @@ namespace Project
 				{
 					_asteroidExplodedEvent.Invoke(collision);
 				}
+				_asteroidDestroyedData.Invoke(this);
 				Destroy(gameObject);
 				return;
 			}

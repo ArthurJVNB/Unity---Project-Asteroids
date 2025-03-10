@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d746ba052866ecc4a8bb3a1f1c704862
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _scoreText: {instanceID: 0}
+  - _prefabScorePopupText: {fileID: 8910926525657960104, guid: 345b778898f361648a58fcb4d3c93414, type: 3}
+  - _scoreChangedEvent: {fileID: 11400000, guid: 84142707025e14748942a0726c73d120, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 17a02980bf4485f4d87385adcac94b35
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _asteroidDestroyedEvent: {fileID: 11400000, guid: a18b456477e539b488de638340f5c27b, type: 2}
+  - _scoreChangedEvent: {fileID: 11400000, guid: 84142707025e14748942a0726c73d120, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
