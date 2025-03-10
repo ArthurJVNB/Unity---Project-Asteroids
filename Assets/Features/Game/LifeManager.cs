@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Project
 {
@@ -9,10 +10,13 @@ namespace Project
 		[Min(0)]
 		[SerializeField] private int _lifes = 3;
 
+		[Header("Events Invoked")]
+		[SerializeField] private EventData _gameOverEvent;
+		[SerializeField] private UnityEvent _onGameOver;
+
 		[Header("Events Listened")]
 		[SerializeField] private SpaceshipEventData _spaceshipDiedEvent;
 		[SerializeField] private IntEventData _lifesChangedEvent;
-		[SerializeField] private EventData _gameOverEvent;
 
 		private bool _isGameOver;
 
@@ -64,6 +68,7 @@ namespace Project
 #endif
 			_isGameOver = true;
 			_gameOverEvent.Invoke();
+			_onGameOver?.Invoke();
 		}
 	}
 }

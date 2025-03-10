@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5282980608794328730
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8987667836767000682}
+  - component: {fileID: 3421399335894808906}
+  m_Layer: 0
+  m_Name: ParticleEffectsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8987667836767000682
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5282980608794328730}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3421399335894808906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5282980608794328730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4074538a84eb2aa4abe4421613b35699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spaceshipExplosionEffect: {fileID: 5835821584528752503, guid: 561b5811b60a53144a0cb4f89174af87, type: 3}
+  _asteroidCollisionBulletEffect: {fileID: 3957185895593581601, guid: d69064525b101c9498b82f5bcc36a0e0, type: 3}
+  _asteroidCollisionAsteroidEffect: {fileID: 6820471094835898737, guid: b2621d8388990df4696f5407d0f26b59, type: 3}
+  _asteroidExplosionEffect: {fileID: 5835821584528752503, guid: 561b5811b60a53144a0cb4f89174af87, type: 3}
+  _spaceshipCollidedAsteroidEvent: {fileID: 11400000, guid: 65f940cdd2b6df7499dccc20d4681350, type: 2}
+  _asteroidCollidedBulletEvent: {fileID: 11400000, guid: 410968cb0107683458050e651c04c7a1, type: 2}
+  _asteroidCollidedAsteroidEvent: {fileID: 11400000, guid: 86629b5755bbb2e45b699c6c3aea594e, type: 2}
+  _asteroidExplodedEvent: {fileID: 11400000, guid: 1cf5098e03460c34691086501857b278, type: 2}

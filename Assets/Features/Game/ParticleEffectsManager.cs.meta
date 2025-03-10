@@ -1,2 +1,19 @@
 fileFormatVersion: 2
 guid: 4074538a84eb2aa4abe4421613b35699
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _spaceshipExplosionEffect: {instanceID: 0}
+  - _asteroidCollisionBulletEffect: {instanceID: 0}
+  - _asteroidCollisionAsteroidEffect: {instanceID: 0}
+  - _asteroidExplosionEffect: {instanceID: 0}
+  - _spaceshipCollidedAsteroidEvent: {fileID: 11400000, guid: 65f940cdd2b6df7499dccc20d4681350, type: 2}
+  - _asteroidCollidedBulletEvent: {fileID: 11400000, guid: 410968cb0107683458050e651c04c7a1, type: 2}
+  - _asteroidCollidedAsteroidEvent: {fileID: 11400000, guid: 86629b5755bbb2e45b699c6c3aea594e, type: 2}
+  - _asteroidExplodedEvent: {fileID: 11400000, guid: 1cf5098e03460c34691086501857b278, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

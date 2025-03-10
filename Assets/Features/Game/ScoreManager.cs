@@ -12,8 +12,10 @@ namespace Project
 		[SerializeField] private ScoreEventData _scoreChangedEvent;
 
 		[Header("Events Listened")]
-
 		[SerializeField] private AsteroidEventData _asteroidDestroyedEvent;
+
+		public int Score => _score;
+
 		private void OnEnable()
 		{
 			_asteroidDestroyedEvent.Event += OnAsteroidDestroyed_Event;
