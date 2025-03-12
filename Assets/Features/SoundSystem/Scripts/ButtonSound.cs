@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Project.Sound
 {
-	public class ButtonSFX : MonoBehaviour
+	public class ButtonSound : MonoBehaviour
 	{
 		[SerializeField] private AudioData _audioData;
 		[Range(0, 1)]

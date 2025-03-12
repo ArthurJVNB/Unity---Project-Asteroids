@@ -3,17 +3,17 @@ using UnityEngine.UI;
 
 namespace Project.Sound
 {
-	public class ToggleSFX : SwitchSFX
+	public class ToggleSound : SwitchSound
 	{
 		[Space]
-		[SerializeField] private Toggle _toggle;
+		[SerializeField] protected Toggle _toggle;
 
 		private void Reset()
 		{
 			_toggle = GetComponentInChildren<Toggle>();
 		}
 
-		private void OnEnable()
+		protected virtual void OnEnable()
 		{
 			_toggle.onValueChanged.AddListener(OnToggleValueChanged);
 		}
@@ -23,7 +23,7 @@ namespace Project.Sound
 			_toggle.onValueChanged.RemoveListener(OnToggleValueChanged);
 		}
 
-		private void OnToggleValueChanged(bool isOn)
+		protected virtual void OnToggleValueChanged(bool isOn)
 		{
 			if (isOn)
 				PlaySoundOn();

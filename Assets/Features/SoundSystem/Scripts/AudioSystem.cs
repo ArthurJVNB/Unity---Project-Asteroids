@@ -33,12 +33,12 @@ namespace Project.Sound
 			return _volumeLevels[soundType];
 		}
 
-		public static void SetMuted(SoundType soundType, bool on)
+		public static void SetMuted(SoundType soundType, bool isMuted)
 		{
-			_muted[soundType] = on;
+			_muted[soundType] = isMuted;
 		}
 
-		public static bool IsMuted(SoundType soundType)
+		public static bool IsMute(SoundType soundType)
 		{
 			return _muted[soundType];
 		}

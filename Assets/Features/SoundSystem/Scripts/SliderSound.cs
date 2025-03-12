@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Project.Sound
 {
-	public class SliderSFX : MonoBehaviour
+	public class SliderSound : MonoBehaviour
 	{
 		[SerializeField] protected AudioData _audioData;
 		[Range(0, 1)]

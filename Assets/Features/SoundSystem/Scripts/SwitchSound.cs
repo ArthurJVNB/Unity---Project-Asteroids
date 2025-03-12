@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Project.Sound
 {
-	public class SwitchSFX : MonoBehaviour
+	public class SwitchSound : MonoBehaviour
 	{
 		[SerializeField] private AudioData _audioDataOn;
 		[SerializeField] private AudioData _audioDataOff;

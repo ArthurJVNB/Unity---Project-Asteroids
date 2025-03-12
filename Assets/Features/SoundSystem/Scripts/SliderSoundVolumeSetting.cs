@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Project.Sound
 {
-	public class SliderVolumeSettingSFX : SliderSFX
+	public class SliderSoundVolumeSetting : SliderSound
 	{
 		protected override void OnSliderValueChanged(float value)
 		{
