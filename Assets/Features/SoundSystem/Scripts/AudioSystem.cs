@@ -53,6 +53,7 @@ namespace Project.Sound
 			audioSource.volume = volume * (ignoreMuted ? GetVolumeIgnoreMuted(audioData.SoundType) : GetVolume(audioData.SoundType));
 			audioSource.Play();
 			//Object.Destroy(gameObject, audioData.AudioClip.length * ((Time.timeScale < 0.01f) ? 0.01f : Time.timeScale));
+			Object.DontDestroyOnLoad(gameObject);
 			Object.Destroy(gameObject, Mathf.Max(audioData.AudioClip.length * ((Time.timeScale < 0.01f) ? 0.01f : Time.timeScale), .5f));
 		}
 
