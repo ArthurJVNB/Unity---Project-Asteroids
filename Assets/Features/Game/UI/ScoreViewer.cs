@@ -5,7 +5,8 @@ namespace Project
 {
 	public class ScoreViewer : MonoBehaviour
 	{
-		[Header("Score (optional)")]
+		[Header("Score")]
+		[ContextMenuItem("Find Score Manager", nameof(FindScoreManager))]
 		[SerializeField] private ScoreManager _scoreManager;
 		[SerializeField] private TMP_Text _scoreText;
 		[SerializeField] private string _scoreFormat = "Score: {0}";
@@ -15,7 +16,7 @@ namespace Project
 
 		private void Reset()
 		{
-			_scoreManager = FindFirstObjectByType<ScoreManager>();
+			FindScoreManager();
 			_scoreText = GetComponentInChildren<TMP_Text>();
 		}
 
@@ -25,15 +26,19 @@ namespace Project
 				Setup();
 		}
 
-		private void Setup()
+		[ContextMenu("Find Score Manager")]
+		private void FindScoreManager()
 		{
-			SetupScore();
+			_scoreManager = FindFirstObjectByType<ScoreManager>();
 		}
 
-		private void SetupScore()
+		private void Setup()
 		{
 			if (!_scoreManager || !_scoreText)
+			{
+				Debug.LogWarning("Must set Score Manager and Score Text.", this);
 				return;
+			}
 
 			_scoreText.text = string.Format(_scoreFormat, _scoreManager.Score);
 		}
