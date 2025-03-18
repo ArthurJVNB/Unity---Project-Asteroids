@@ -45,7 +45,7 @@ namespace Project.Sound
 
 		public static void PlaySound(AudioData audioData, Vector3 position, float volume = DefaultVolume, bool ignoreMuted = false)
 		{
-			GameObject gameObject = new GameObject("One shot audio");
+			GameObject gameObject = new("One shot audio");
 			gameObject.transform.position = position;
 			AudioSource audioSource = (AudioSource)gameObject.AddComponent(typeof(AudioSource));
 			audioSource.clip = audioData.AudioClip;

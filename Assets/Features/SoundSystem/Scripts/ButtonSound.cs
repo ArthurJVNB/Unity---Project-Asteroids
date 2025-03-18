@@ -12,6 +12,8 @@ namespace Project.Sound
 		[SerializeField] private bool _ignoreMuted;
 		[Space]
 		[SerializeField] private Button _button;
+		[Tooltip("Optional.\n\nIf not set, it will spawn a GameObject to play as an one shot audio and destroy it. This behaviour is useful when the button is disabled when clicked.")]
+		[SerializeField] private AudioSource _audioSource;
 
 		private void Reset()
 		{
@@ -35,6 +37,14 @@ namespace Project.Sound
 
 		private void PlaySound()
 		{
+			if (_audioSource)
+			{
+				_audioSource.clip = _audioData.AudioClip;
+				_audioSource.volume = _volume;
+				_audioSource.Play();
+				return;
+			}
+
 			AudioSystem.PlaySound(_audioData, _volume, _ignoreMuted);
 		}
 	}
