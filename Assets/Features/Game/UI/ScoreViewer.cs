@@ -7,6 +7,7 @@ namespace Project
 	{
 		[Header("Score")]
 		[ContextMenuItem("Find Score Manager", nameof(FindScoreManager))]
+		[Tooltip("If not set, it will try to be set on Awake")]
 		[SerializeField] private ScoreManager _scoreManager;
 		[SerializeField] private TMP_Text _scoreText;
 		[SerializeField] private string _scoreFormat = "Score: {0}";
@@ -18,6 +19,12 @@ namespace Project
 		{
 			FindScoreManager();
 			_scoreText = GetComponentInChildren<TMP_Text>();
+		}
+
+		private void Awake()
+		{
+			if (!_scoreManager)
+				FindScoreManager();
 		}
 
 		private void OnEnable()
