@@ -45,7 +45,7 @@ namespace Project.Sound
 				return;
 			}
 
-			AudioSystem.PlaySound(_audioData, _volume, _ignoreMuted);
+			AudioSystem.PlaySoundOneShot(_audioData, _volume, _ignoreMuted);
 		}
 	}
 }
