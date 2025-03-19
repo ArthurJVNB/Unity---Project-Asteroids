@@ -6,6 +6,8 @@ MonoImporter:
   defaultReferences:
   - _positionToShoot: {instanceID: 0}
   - _prefab: {fileID: -4400923225993140678, guid: b06231c8aefc20c4484f3fa33333bad5, type: 3}
+  - _shootAudioDataContainer: {fileID: 11400000, guid: aa29c8eb346ed874087c33d8ed2ab53a, type: 2}
+  - _onShootEvent: {fileID: 11400000, guid: e7d05fa7a2dc703488ed46f876e6764f, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
