@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Project.Sound
 {
 	[CreateAssetMenu(fileName = "AudioDataArray", menuName = "Scriptable Objects/Audio System/Audio Data Array")]
-	public class AudioDataArray : ScriptableObject
+	public class AudioDataArray : AAudioData
 	{
 		[SerializeField] private SoundType _soundType = SoundType.SFX;
 
@@ -24,12 +24,12 @@ namespace Project.Sound
 		public AudioClip RandomAudioClip => _audioClips[Random.Range(0, _audioClips.Length)];
 		private float RandomPitch => AudioSystem.GetRandomPitch(_pitch, _pitchDeviationRange);
 
-		public void Play(AudioSource audioSource, bool ignoreMuted = false)
+		public override void Play(AudioSource audioSource, bool ignoreMuted = false)
 		{
 			AudioSystem.PlaySound(RandomAudioClip, _soundType, audioSource, pitch: RandomPitch, ignoreMuted: ignoreMuted);
 		}
 
-		public void PlayOneShot(Vector3 position, bool ignoreMuted = false)
+		public override void PlayOneShot(Vector3 position, bool ignoreMuted = false)
 		{
 			AudioSystem.PlaySoundOneShot(RandomAudioClip, _soundType, position, pitch: RandomPitch, ignoreMuted: ignoreMuted);
 		}

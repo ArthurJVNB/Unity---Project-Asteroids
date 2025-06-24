@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Project.Sound
 {
 	[CreateAssetMenu(fileName = "AudioData", menuName = "Scriptable Objects/Audio System/Audio Data")]
-	public class AudioData : ScriptableObject
+	public class AudioData : AAudioData
 	{
 		[SerializeField] private SoundType _soundType = SoundType.SFX;
 
@@ -22,12 +22,12 @@ namespace Project.Sound
 		public float Pitch { get => _pitch; set => _pitch = value; }
 		public float PitchDeviation { get => _pitchDeviationRange; set => _pitchDeviationRange = value; }
 
-		public void Play(AudioSource audioSource, bool ignoreMuted = false)
+		public override void Play(AudioSource audioSource, bool ignoreMuted = false)
 		{
 			AudioSystem.PlaySound(this, audioSource, ignoreMuted: ignoreMuted);
 		}
 
-		public void PlayOneShot(Vector2 position, bool ignoreMuted = false)
+		public override void PlayOneShot(Vector3 position, bool ignoreMuted = false)
 		{
 			AudioSystem.PlaySoundOneShot(this, position, ignoreMuted: ignoreMuted);
 		}
