@@ -13,8 +13,9 @@ namespace Project
 		[SerializeField] private float _minSize = 0.5f;
 		[SerializeField] private float _maxSize = 1.5f;
 		[SerializeField] private float _speed = 50;
-		[SerializeField] private AAudioData _asteroidCollisionAudioData;
-		[SerializeField] private AAudioData _asteroidExplosionAudioData;
+		[Header("Audios")]
+		[SerializeField, Tooltip("Optional")] private AAudioData _asteroidCollisionAudioData;
+		[SerializeField, Tooltip("Optional")] private AAudioData _asteroidExplosionAudioData;
 		[Header("Events Invoked")]
 		[SerializeField] private Collision2DEventData _asteroidCollidedBulletEvent;
 		[SerializeField] private Collision2DEventData _asteroidCollidedAsteroidEvent;

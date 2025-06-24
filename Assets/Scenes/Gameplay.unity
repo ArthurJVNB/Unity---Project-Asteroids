@@ -995,6 +995,7 @@ MonoBehaviour:
   _thrustSpeed: 1
   _turnSpeed: 0.05
   _graceTimeAfterSpawn: 3
+  _spaceshipExplosionAudioData: {fileID: 11400000, guid: 9568198010e84544a9918a718c4e060a, type: 2}
   _spaceshipDiedEvent: {fileID: 11400000, guid: 23d18b2f4ccd7764a8d1b1e80c7bb4ea, type: 2}
   _spaceshipGraceTimeChangedEvent: {fileID: 11400000, guid: 44a2f913deaa2ce4d8ae071a222b246d, type: 2}
   _spaceshipCollidedAsteroidEvent: {fileID: 11400000, guid: 65f940cdd2b6df7499dccc20d4681350, type: 2}
