@@ -13,6 +13,7 @@ namespace Project
 		[SerializeField] private float _minSize = 0.5f;
 		[SerializeField] private float _maxSize = 1.5f;
 		[SerializeField] private float _speed = 50;
+		[SerializeField] private AAudioData _asteroidCollisionAudioData;
 		[SerializeField] private AAudioData _asteroidExplosionAudioData;
 		[Header("Events Invoked")]
 		[SerializeField] private Collision2DEventData _asteroidCollidedBulletEvent;
@@ -54,6 +55,7 @@ namespace Project
 			if (collision.gameObject.TryGetComponent(out Asteroid _))
 			{
 				_asteroidCollidedAsteroidEvent.Invoke(collision);
+				if (_asteroidCollisionAudioData) _asteroidCollisionAudioData.PlayOneShot(transform.position);
 				return;
 			}
 
