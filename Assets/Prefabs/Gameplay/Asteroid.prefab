@@ -54,6 +54,7 @@ MonoBehaviour:
   _minSize: 0.5
   _maxSize: 1.5
   _speed: 5
+  _asteroidExplosionAudioData: {fileID: 11400000, guid: bdf6c34d62c3e9846850dc1f69156465, type: 2}
   _asteroidCollidedBulletEvent: {fileID: 11400000, guid: 410968cb0107683458050e651c04c7a1, type: 2}
   _asteroidCollidedAsteroidEvent: {fileID: 11400000, guid: 86629b5755bbb2e45b699c6c3aea594e, type: 2}
   _asteroidExplodedEvent: {fileID: 11400000, guid: 1cf5098e03460c34691086501857b278, type: 2}
