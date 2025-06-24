@@ -1,3 +1,4 @@
+using Project.Sound;
 using UnityEngine;
 
 namespace Project
@@ -12,6 +13,9 @@ namespace Project
 		[SerializeField] private float _minSize = 0.5f;
 		[SerializeField] private float _maxSize = 1.5f;
 		[SerializeField] private float _speed = 50;
+		[Header("Audios")]
+		[SerializeField, Tooltip("Optional")] private AAudioData _asteroidCollisionAudioData;
+		[SerializeField, Tooltip("Optional")] private AAudioData _asteroidExplosionAudioData;
 		[Header("Events Invoked")]
 		[SerializeField] private Collision2DEventData _asteroidCollidedBulletEvent;
 		[SerializeField] private Collision2DEventData _asteroidCollidedAsteroidEvent;
@@ -52,6 +56,7 @@ namespace Project
 			if (collision.gameObject.TryGetComponent(out Asteroid _))
 			{
 				_asteroidCollidedAsteroidEvent.Invoke(collision);
+				if (_asteroidCollisionAudioData) _asteroidCollisionAudioData.PlayOneShot(transform.position);
 				return;
 			}
 
@@ -68,6 +73,7 @@ namespace Project
 					_asteroidExplodedEvent.Invoke(collision);
 				}
 				_asteroidDestroyedData.Invoke(this);
+				if (_asteroidExplosionAudioData) _asteroidExplosionAudioData.PlayOneShot(transform.position);
 				Destroy(gameObject);
 				return;
 			}

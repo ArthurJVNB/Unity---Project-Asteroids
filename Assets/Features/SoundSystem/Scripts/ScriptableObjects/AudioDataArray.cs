@@ -2,12 +2,10 @@ using UnityEngine;
 
 namespace Project.Sound
 {
-	[CreateAssetMenu(fileName = "AudioData", menuName = "Scriptable Objects/Audio System/Audio Data")]
-	public class AudioData : AAudioData
+	[CreateAssetMenu(fileName = "AudioDataArray", menuName = "Scriptable Objects/Audio System/Audio Data Array")]
+	public class AudioDataArray : AAudioData
 	{
 		[SerializeField] private SoundType _soundType = SoundType.SFX;
-
-		[SerializeField] private AudioClip _audioClip;
 
 		[Range(AudioSystem.MinPitch, AudioSystem.MaxPitch)]
 		[SerializeField] private float _pitch = AudioSystem.DefaultPitch;
@@ -17,19 +15,23 @@ namespace Project.Sound
 		[Range(0, 3)]
 		[SerializeField] private float _pitchDeviationRange = 0;
 
+		[SerializeField] private AudioClip[] _audioClips;
+
 		public SoundType SoundType { get => _soundType; set => _soundType = value; }
-		public AudioClip AudioClip { get => _audioClip; set => _audioClip = value; }
-		public float Pitch { get => _pitch; set => _pitch = value; }
+		public AudioClip[] AudioClips { get => _audioClips; set => _audioClips = value; }
 		public float PitchDeviation { get => _pitchDeviationRange; set => _pitchDeviationRange = value; }
+
+		public AudioClip RandomAudioClip => _audioClips[Random.Range(0, _audioClips.Length)];
+		private float RandomPitch => AudioSystem.GetRandomPitch(_pitch, _pitchDeviationRange);
 
 		public override void Play(AudioSource audioSource, bool ignoreMuted = false)
 		{
-			AudioSystem.PlaySound(this, audioSource, ignoreMuted: ignoreMuted);
+			AudioSystem.PlaySound(RandomAudioClip, _soundType, audioSource, pitch: RandomPitch, ignoreMuted: ignoreMuted);
 		}
 
 		public override void PlayOneShot(Vector3 position, bool ignoreMuted = false)
 		{
-			AudioSystem.PlaySoundOneShot(this, position, ignoreMuted: ignoreMuted);
+			AudioSystem.PlaySoundOneShot(RandomAudioClip, _soundType, position, pitch: RandomPitch, ignoreMuted: ignoreMuted);
 		}
 	}
 }

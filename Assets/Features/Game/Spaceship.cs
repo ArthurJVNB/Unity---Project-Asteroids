@@ -1,5 +1,6 @@
 using System;
 using NaughtyAttributes;
+using Project.Sound;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,7 +15,8 @@ namespace Project
 		[SerializeField] private float _thrustSpeed = 1;
 		[SerializeField] private float _turnSpeed = 1;
 		[SerializeField] private float _graceTimeAfterSpawn = 3;
-
+		[Header("Audios")]
+		[SerializeField, Tooltip("Optional")] private AAudioData _spaceshipExplosionAudioData;
 		[Header("Events Invoked")]
 		[SerializeField] private SpaceshipEventData _spaceshipDiedEvent;
 		[SerializeField] private SpaceshipEventData _spaceshipGraceTimeChangedEvent;
@@ -53,6 +55,7 @@ namespace Project
 			if (!collision.gameObject.TryGetComponent(out Asteroid _)) return;
 			_spaceshipCollidedAsteroidEvent.Invoke(collision);
 			_spaceshipDiedEvent.Invoke(this);
+			if (_spaceshipExplosionAudioData) _spaceshipExplosionAudioData.PlayOneShot(transform.position);
 		}
 
 		public void Enable()

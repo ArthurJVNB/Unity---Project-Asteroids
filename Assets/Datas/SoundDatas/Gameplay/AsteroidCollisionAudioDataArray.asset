@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45f71d8448b4dca41b0353b220f09116, type: 3}
-  m_Name: DemoToggleOnSFXAudioData
+  m_Script: {fileID: 11500000, guid: 50d61ccc93a5f84448440c25489a029b, type: 3}
+  m_Name: AsteroidCollisionAudioDataArray
   m_EditorClassIdentifier: 
   _soundType: 0
-  _audioClip: {fileID: 8300000, guid: ca131f417856c2044b4f399e5147ab04, type: 3}
   _pitch: 1
-  _pitchDeviationRange: 0
+  _pitchDeviationRange: 1
+  _audioClips:
+  - {fileID: 8300000, guid: 279ce85f6797f9c42aaa054acaf7720b, type: 3}
+  - {fileID: 8300000, guid: 326176f02a02ca04e9f11e62122b96f8, type: 3}

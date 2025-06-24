@@ -23,7 +23,7 @@ namespace Project.Sound
 
 		private void PlaySound(AudioData audioData)
 		{
-			AudioSystem.PlaySound(audioData, _volume, _ignoreMuted);
+			AudioSystem.PlaySoundOneShot(audioData, _volume, _ignoreMuted);
 		}
 	}
 }

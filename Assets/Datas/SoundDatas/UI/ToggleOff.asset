@@ -10,9 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45f71d8448b4dca41b0353b220f09116, type: 3}
-  m_Name: DemoToggleOnSFXAudioData
+  m_Name: ToggleOff
   m_EditorClassIdentifier: 
   _soundType: 0
-  _audioClip: {fileID: 8300000, guid: ca131f417856c2044b4f399e5147ab04, type: 3}
-  _pitch: 1
-  _pitchDeviationRange: 0
+  _audioClip: {fileID: 8300000, guid: a474bd00debd6ad419b46fefbc5bea3c, type: 3}
