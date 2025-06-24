@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _soundType: 0
   _pitch: 1
-  _pitchDeviationRange: 0
-  _audioClips: []
+  _pitchDeviationRange: 1
+  _audioClips:
+  - {fileID: 8300000, guid: 279ce85f6797f9c42aaa054acaf7720b, type: 3}
+  - {fileID: 8300000, guid: 326176f02a02ca04e9f11e62122b96f8, type: 3}
