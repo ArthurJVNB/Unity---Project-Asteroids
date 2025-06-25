@@ -1,0 +1,14 @@
+{
+    "name": "Project.Sound.Playlist",
+    "rootNamespace": "Project.Sound.Playlist",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
