@@ -7,6 +7,8 @@ namespace Project.Sound
 	{
 		public const int DefaultVolume = 1;
 		public const int DefaultPitch = 1;
+		public const int MaxVolume = 1;
+		public const int MinVolume = 0;
 		public const int MaxPitch = 3;
 		public const int MinPitch = -MaxPitch;
 		private const bool DefaultMuted = false;
@@ -89,9 +91,9 @@ namespace Project.Sound
 			PlaySoundOneShot(audioData, Vector3.zero, volume, ignoreMuted);
 		}
 
-		public static void PlaySound(AudioData audioData, AudioSource audioSource, float volume = DefaultVolume, bool ignoreMuted = false)
+		public static void PlaySound(AudioData audioData, AudioSource audioSource, bool ignoreMuted = false)
 		{
-			PlaySound(audioData.AudioClip, audioData.SoundType, audioSource, GetRandomPitch(audioData.Pitch, audioData.PitchDeviation), volume, ignoreMuted);
+			PlaySound(audioData.AudioClip, audioData.SoundType, audioSource, GetRandomPitch(audioData.Pitch, audioData.PitchDeviation), audioData.Volume, ignoreMuted);
 		}
 
 		private static void SetupDefaultVolumes()

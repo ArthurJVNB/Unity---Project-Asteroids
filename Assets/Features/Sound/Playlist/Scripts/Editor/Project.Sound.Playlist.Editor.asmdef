@@ -1,11 +1,13 @@
 {
-    "name": "Project.Sound.Playlist",
-    "rootNamespace": "Project.Sound.Playlist",
+    "name": "Project.Sound.Playlist.Editor",
+    "rootNamespace": "Project.Sound.Playlist.Editor",
     "references": [
         "GUID:5ba43a5cbd4e88c41a9e48f82784c3c0",
-        "GUID:776d03a35f1b52c4a9aed9f56d7b4229"
+        "GUID:9dfb64a3d1db591458570aae8846b5a0"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

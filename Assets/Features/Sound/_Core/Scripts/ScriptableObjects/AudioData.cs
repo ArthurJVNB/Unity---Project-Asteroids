@@ -2,12 +2,15 @@ using UnityEngine;
 
 namespace Project.Sound
 {
-	[CreateAssetMenu(fileName = "AudioData", menuName = "Scriptable Objects/Audio System/Audio Data")]
+	[CreateAssetMenu(fileName = "AudioData", menuName = "Scriptable Objects/Sound System/Audio Data")]
 	public class AudioData : AAudioData
 	{
 		[SerializeField] private SoundType _soundType = SoundType.SFX;
 
 		[SerializeField] private AudioClip _audioClip;
+
+		[Range(AudioSystem.MinVolume, AudioSystem.MaxVolume)]
+		[SerializeField] private float _volume = AudioSystem.MaxVolume;
 
 		[Range(AudioSystem.MinPitch, AudioSystem.MaxPitch)]
 		[SerializeField] private float _pitch = AudioSystem.DefaultPitch;
@@ -17,10 +20,35 @@ namespace Project.Sound
 		[Range(0, 3)]
 		[SerializeField] private float _pitchDeviationRange = 0;
 
-		public SoundType SoundType { get => _soundType; set => _soundType = value; }
-		public AudioClip AudioClip { get => _audioClip; set => _audioClip = value; }
-		public float Pitch { get => _pitch; set => _pitch = value; }
-		public float PitchDeviation { get => _pitchDeviationRange; set => _pitchDeviationRange = value; }
+		public SoundType SoundType
+		{
+			get => _soundType;
+			set => _soundType = value;
+		}
+
+		public AudioClip AudioClip
+		{
+			get => _audioClip;
+			set => _audioClip = value;
+		}
+
+		public float Volume
+		{
+			get => _volume;
+			set => _volume = Mathf.Clamp(value, AudioSystem.MinVolume, AudioSystem.MaxVolume);
+		}
+
+		public float Pitch
+		{
+			get => _pitch;
+			set => _pitch = Mathf.Clamp(value, AudioSystem.MinPitch, AudioSystem.MaxPitch);
+		}
+
+		public float PitchDeviation
+		{
+			get => _pitchDeviationRange;
+			set => _pitchDeviationRange = value;
+		}
 
 		public override void Play(AudioSource audioSource, bool ignoreMuted = false)
 		{
