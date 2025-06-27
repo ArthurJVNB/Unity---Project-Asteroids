@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45f71d8448b4dca41b0353b220f09116, type: 3}
-  m_Name: AudioData2
+  m_Name: DemoAudioData1
   m_EditorClassIdentifier: 
   _soundType: 1
-  _audioClip: {fileID: 8300000, guid: e940d6362f000d54eaf2d119ed36fcd4, type: 3}
+  _audioClip: {fileID: 8300000, guid: 08ae23d1893fe0a4b9f2de66fcdc8575, type: 3}
   _volume: 1
   _pitch: 1
   _pitchDeviationRange: 0
