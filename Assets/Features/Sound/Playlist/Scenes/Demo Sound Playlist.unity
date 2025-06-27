@@ -288,7 +288,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 1999985486}
   _playlist: {fileID: 11400000, guid: cba5ed7ba6199a647aa6ba2d84aaee77, type: 2}
-  _currentAudioDatas: []
+  _shuffle: 1
+  _timeBetweenAudiosMin: 0.1
+  _timeBetweenAudiosMax: 5
 --- !u!4 &1999985485
 Transform:
   m_ObjectHideFlags: 0
