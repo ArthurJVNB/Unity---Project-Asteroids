@@ -1,17 +1,21 @@
-﻿using UnityEditor;
+﻿using System.Collections.Generic;
+using System.Reflection;
+using UnityEditor;
 using UnityEngine;
 
 namespace Project.Sound.Playlist.Editor
 {
-	[CustomEditor(typeof(PlaylistPlayer))]
+	[CustomEditor(typeof(PlaylistPlayer), true)]
 	public class PlaylistPlayerEditor : UnityEditor.Editor
 	{
+		private static bool _foldoutCurrentAudioDatas = true;
 		private PlaylistPlayer Script => (PlaylistPlayer)target;
 
 		public override void OnInspectorGUI()
 		{
 			base.OnInspectorGUI();
 			DrawCurrentAudioData();
+			DrawCurrentAudioDatas();
 			DrawButtons();
 		}
 
@@ -19,8 +23,45 @@ namespace Project.Sound.Playlist.Editor
 		{
 			bool enabled = GUI.enabled;
 			GUI.enabled = false;
-			EditorGUILayout.ObjectField("Current Audio Data", ((PlaylistPlayer)target).CurrentAudioData, typeof(AudioData), false);
+			EditorGUILayout.ObjectField("Current Audio Data", Script.CurrentAudioData, typeof(AudioData), false);
 			GUI.enabled = enabled;
+		}
+
+		private void DrawCurrentAudioDatas()
+		{
+			const string Label = "Current Audio Datas";
+
+			bool enabled = GUI.enabled;
+			
+			FieldInfo fieldInfo = typeof(PlaylistPlayer).GetField("_currentAudioDatas", BindingFlags.NonPublic | BindingFlags.Instance);
+			var currentAudioDatas = fieldInfo?.GetValue(Script) as List<AudioData>;
+			if (currentAudioDatas == null || currentAudioDatas.Count == 0)
+				DrawNone();
+			else
+				DrawList();
+			
+			GUI.enabled = enabled;
+
+			void DrawNone()
+			{
+				GUI.enabled = false;
+				EditorGUILayout.LabelField(Label, "null");
+			}
+
+			void DrawList()
+			{
+				_foldoutCurrentAudioDatas = EditorGUILayout.BeginFoldoutHeaderGroup(_foldoutCurrentAudioDatas, Label);
+				if (_foldoutCurrentAudioDatas)
+				{
+					GUI.enabled = false;
+					EditorGUI.indentLevel++;
+					for (int i = 0; i < currentAudioDatas.Count; i++)
+					{
+						EditorGUILayout.ObjectField("Element " + i, currentAudioDatas[i], typeof(AudioData), false);
+					}
+					EditorGUI.indentLevel--;
+				}
+			}
 		}
 
 		private void DrawButtons()
