@@ -23,6 +23,7 @@ namespace Project.Sound.Playlist
 			Playing,
 			Paused,
 			InTransition,
+			InTransitionPaused,
 		}
 
 		public State CurrentState => _currentState;
@@ -92,16 +93,24 @@ namespace Project.Sound.Playlist
 		public void Play()
 		{
 			if (IsPlayingCurrentAudioData) return;
+			
 			ValidatePlaylist();
+			
+			if (_currentState == State.InTransitionPaused)
+			{
+				_currentState = State.InTransition;
+				return;
+			}
+
 			CurrentAudioData.Play(_audioSource);
 			_currentState = State.Playing;
 		}
 
 		public void Pause()
 		{
-			if (!IsPlaying) return;
+			if (_currentState == State.Paused || _currentState == State.InTransitionPaused) return;
 			_audioSource.Pause();
-			_currentState = State.Paused;
+			_currentState = _currentState == State.InTransition ? State.InTransitionPaused : State.Paused;
 		}
 
 		public void Stop()
@@ -116,7 +125,7 @@ namespace Project.Sound.Playlist
 
 			_currentIndex = (_currentIndex + 1) % _currentAudioDatas.Count;
 
-			if (IsPlaying)
+			if (IsPlaying || _currentState == State.InTransition)
 				Play();
 		}
 
@@ -126,7 +135,7 @@ namespace Project.Sound.Playlist
 
 			_currentIndex = _currentIndex <= 0 ? _currentAudioDatas.Count - 1 : (_currentIndex - 1) % _currentAudioDatas.Count;
 
-			if (IsPlaying)
+			if (_currentState == State.Playing || _currentState == State.InTransition)
 				Play();
 		}
 
@@ -177,22 +186,37 @@ namespace Project.Sound.Playlist
 
 		private void StartTransition()
 		{
+			_currentState = State.None;
+			Next();
+			
 			if (_timeBetweenAudiosMin <= 0 && _timeBetweenAudiosMax <= 0)
 			{
-				PlayNext();
+				Play();
 				return;
 			}
 
 			if (_transitionRoutine != null)
 				StopCoroutine(_transitionRoutine);
 			_transitionRoutine = StartCoroutine(TransitionRoutine());
-
 		}
+
 		private IEnumerator TransitionRoutine()
 		{
 			_currentState = State.InTransition;
-			yield return new WaitForSeconds(Random.Range(_timeBetweenAudiosMin, _timeBetweenAudiosMax));
-			PlayNext();
+
+			float waitTime = 0;
+			float totalWaitTime = Random.Range(_timeBetweenAudiosMin, _timeBetweenAudiosMax);
+
+			while (waitTime < totalWaitTime)
+			{
+				if (_currentState == State.InTransitionPaused)
+					yield return new WaitWhile(() => _currentState == State.InTransitionPaused);
+				yield return null;
+				waitTime += Time.deltaTime;
+			}
+
+			if (_currentState != State.InTransition) yield break;
+			Play();
 		}
 	}
 }
