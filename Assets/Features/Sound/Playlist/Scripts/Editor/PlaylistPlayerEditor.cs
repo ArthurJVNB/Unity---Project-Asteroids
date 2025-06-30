@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
@@ -13,10 +14,20 @@ namespace Project.Sound.Playlist.Editor
 
 		public override void OnInspectorGUI()
 		{
+			Repaint();
 			base.OnInspectorGUI();
+			DrawCurrentState();
 			DrawCurrentAudioData();
 			DrawCurrentAudioDatas();
 			DrawButtons();
+		}
+
+		private void DrawCurrentState()
+		{
+			bool enabled = GUI.enabled;
+			GUI.enabled = false;
+			EditorGUILayout.EnumFlagsField("Current State", Script.CurrentState);
+			GUI.enabled = enabled;
 		}
 
 		private void DrawCurrentAudioData()
@@ -29,11 +40,12 @@ namespace Project.Sound.Playlist.Editor
 
 		private void DrawCurrentAudioDatas()
 		{
+			const string FieldName = "_currentAudioDatas";
 			const string Label = "Current Audio Datas";
 
 			bool enabled = GUI.enabled;
 			
-			FieldInfo fieldInfo = typeof(PlaylistPlayer).GetField("_currentAudioDatas", BindingFlags.NonPublic | BindingFlags.Instance);
+			FieldInfo fieldInfo = typeof(PlaylistPlayer).GetField(FieldName, BindingFlags.NonPublic | BindingFlags.Instance);
 			var currentAudioDatas = fieldInfo?.GetValue(Script) as List<AudioData>;
 			if (currentAudioDatas == null || currentAudioDatas.Count == 0)
 				DrawNone();

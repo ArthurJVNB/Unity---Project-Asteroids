@@ -1,6 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using NaughtyAttributes;
 using UnityEngine;
 
 namespace Project.Sound.Playlist
@@ -12,14 +12,20 @@ namespace Project.Sound.Playlist
 		[SerializeField] private bool _shuffle = true;
 		[SerializeField, Min(0)] private float _timeBetweenAudiosMin = .1f;
 		[SerializeField, Min(0)] private float _timeBetweenAudiosMax = 5f;
+		private State _currentState = State.None;
 		private List<AudioData> _currentAudioDatas;
 		private int _currentIndex = -1;
+		private Coroutine _transitionRoutine;
 
-		private bool IsPlaying => _audioSource.isPlaying;
+		public enum State
+		{
+			None,
+			Playing,
+			Paused,
+			InTransition,
+		}
 
-		private bool IsPlayingCurrentAudioData => _audioSource.clip && CurrentAudioData.AudioClip == _audioSource.clip && IsPlaying;
-
-		private bool IsPlaylistReady => _currentAudioDatas != null && _currentAudioDatas.Count > 0;
+		public State CurrentState => _currentState;
 
 		public AudioData CurrentAudioData
 		{
@@ -30,6 +36,19 @@ namespace Project.Sound.Playlist
 				return hasAudioDatas && hasValidIndex ? _currentAudioDatas[_currentIndex] : null;
 			}
 		}
+
+		private bool IsPlaying
+		{
+			get
+			{
+				//return _audioSource.isPlaying;
+				return _currentState == State.Playing;
+			}
+		}
+
+		private bool IsPlayingCurrentAudioData => _audioSource.clip && CurrentAudioData.AudioClip == _audioSource.clip && IsPlaying;
+
+		private bool IsPlaylistReady => _currentAudioDatas != null && _currentAudioDatas.Count > 0;
 
 #if UNITY_EDITOR
 		private float _previousTimeBetweenAudiosMin = 0f;
@@ -67,7 +86,7 @@ namespace Project.Sound.Playlist
 
 		private void Update()
 		{
-			if (IsPlaying) return;
+			HandleStateTransition();
 		}
 
 		public void Play()
@@ -75,17 +94,20 @@ namespace Project.Sound.Playlist
 			if (IsPlayingCurrentAudioData) return;
 			ValidatePlaylist();
 			CurrentAudioData.Play(_audioSource);
+			_currentState = State.Playing;
 		}
 
 		public void Pause()
 		{
 			if (!IsPlaying) return;
 			_audioSource.Pause();
+			_currentState = State.Paused;
 		}
 
 		public void Stop()
 		{
 			_audioSource.Stop();
+			_currentState = State.None;
 		}
 
 		public void Next()
@@ -145,6 +167,32 @@ namespace Project.Sound.Playlist
 			Stop();
 			_currentIndex = 0;
 			_currentAudioDatas = new List<AudioData>(_playlist.AudioDatas);
+		}
+
+		private void HandleStateTransition()
+		{
+			if (_currentState == State.Playing && !_audioSource.isPlaying)
+				StartTransition();
+		}
+
+		private void StartTransition()
+		{
+			if (_timeBetweenAudiosMin <= 0 && _timeBetweenAudiosMax <= 0)
+			{
+				PlayNext();
+				return;
+			}
+
+			if (_transitionRoutine != null)
+				StopCoroutine(_transitionRoutine);
+			_transitionRoutine = StartCoroutine(TransitionRoutine());
+
+		}
+		private IEnumerator TransitionRoutine()
+		{
+			_currentState = State.InTransition;
+			yield return new WaitForSeconds(Random.Range(_timeBetweenAudiosMin, _timeBetweenAudiosMax));
+			PlayNext();
 		}
 	}
 }
