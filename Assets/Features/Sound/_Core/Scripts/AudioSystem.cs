@@ -5,6 +5,9 @@ namespace Project.Sound
 {
 	public static class AudioSystem
 	{
+		public static event System.Action<SoundType, float> OnChangedVolume;
+		public static event System.Action<SoundType, bool> OnChangedMuted;
+
 		public const int DefaultVolume = 1;
 		public const int DefaultPitch = 1;
 		public const int MaxVolume = 1;
@@ -19,6 +22,8 @@ namespace Project.Sound
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
 		private static void Init()
 		{
+			OnChangedVolume = (_, _) => { };
+			OnChangedMuted = (_, _) => { };
 			SetupDefaultVolumes();
 			SetupDefaultMuted();
 		}
@@ -26,6 +31,12 @@ namespace Project.Sound
 		public static void SetVolume(SoundType soundType, float volume)
 		{
 			_volumeLevels[soundType] = Mathf.Clamp01(volume);
+			OnChangedVolume.Invoke(soundType, volume);
+		}
+
+		public static float GetVolume(AudioData audioData)
+		{
+			return GetVolume(audioData.SoundType) * audioData.Volume;
 		}
 
 		public static float GetVolume(SoundType soundType)
@@ -41,6 +52,7 @@ namespace Project.Sound
 		public static void SetMuted(SoundType soundType, bool isMuted)
 		{
 			_muted[soundType] = isMuted;
+			OnChangedMuted.Invoke(soundType, isMuted);
 		}
 
 		public static bool IsMute(SoundType soundType)
