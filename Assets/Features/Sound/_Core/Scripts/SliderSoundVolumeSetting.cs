@@ -7,7 +7,7 @@ namespace Project.Sound
 		protected override void OnSliderValueChanged(float value)
 		{
 			base.OnSliderValueChanged(value);
-			AudioSystem.SetVolume(_audioData.SoundType, _slider.normalizedValue);
+			AudioSystem.SetVolume(_soundType, _slider.normalizedValue);
 		}
 	}
 }
