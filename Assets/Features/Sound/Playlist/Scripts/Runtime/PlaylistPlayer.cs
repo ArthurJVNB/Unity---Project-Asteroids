@@ -89,24 +89,36 @@ namespace Project.Sound.Playlist
 		}
 #endif
 
+		private void Awake()
+		{
+			AudioSystem.OnChangedVolume += AudioSystem_OnChangedVolume;
+			AudioSystem.OnChangedMuted += AudioSystem_OnChangedMuted;
+		}
+
 		private void Update()
 		{
 			HandleStateTransition();
 		}
 
+		private void OnDestroy()
+		{
+			AudioSystem.OnChangedVolume -= AudioSystem_OnChangedVolume;
+			AudioSystem.OnChangedMuted -= AudioSystem_OnChangedMuted;
+		}
+
 		public void Play()
 		{
 			if (IsPlayingCurrentAudioData) return;
-			
+
 			ValidatePlaylist();
-			
+
 			if (_currentState == State.InTransitionPaused)
 			{
 				_currentState = State.InTransition;
 				return;
 			}
 
-			CurrentAudioData.Play(_audioSource);
+			CurrentAudioData.Play(_audioSource, ignoreMuted: true);
 			_currentState = State.Playing;
 		}
 
@@ -224,6 +236,23 @@ namespace Project.Sound.Playlist
 
 			if (_currentState != State.InTransition) yield break;
 			Play();
+		}
+
+		private bool IsSameSoundType(SoundType soundType)
+		{
+			return IsPlaylistReady && CurrentAudioData.SoundType == soundType;
+		}
+
+		private void AudioSystem_OnChangedVolume(SoundType soundType, float volume)
+		{
+			if (!IsSameSoundType(soundType)) return;
+			_audioSource.volume = volume * CurrentAudioData.Volume;
+		}
+
+		private void AudioSystem_OnChangedMuted(SoundType soundType, bool isMuted)
+		{
+			if (!IsSameSoundType(soundType)) return;
+			_audioSource.mute = isMuted;
 		}
 	}
 }
