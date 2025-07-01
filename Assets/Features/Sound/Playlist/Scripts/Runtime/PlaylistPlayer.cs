@@ -9,9 +9,13 @@ namespace Project.Sound.Playlist
 	{
 		[SerializeField] private AudioSource _audioSource;
 		[SerializeField] private AudioDataContainer _playlist;
-		[SerializeField] private bool _shuffle = true;
 		[SerializeField, Min(0)] private float _timeBetweenAudiosMin = .1f;
 		[SerializeField, Min(0)] private float _timeBetweenAudiosMax = 5f;
+		[SerializeField] private bool _shuffle = true;
+		[Tooltip("If set to true, the player will loop through the playlist indefinitely. " +
+				 "If set to false, it will stop playing when it reaches the end of the playlist.\n\n" +
+				 "Note: Only applicable in transition.")]
+		[SerializeField] private bool _loop = true;
 		private State _currentState = State.None;
 		private List<AudioData> _currentAudioDatas;
 		private int _currentIndex = -1;
@@ -188,7 +192,10 @@ namespace Project.Sound.Playlist
 		{
 			_currentState = State.None;
 			Next();
-			
+
+			if (!_loop && _currentIndex == 0)
+				return;
+
 			if (_timeBetweenAudiosMin <= 0 && _timeBetweenAudiosMax <= 0)
 			{
 				Play();
