@@ -7,6 +7,7 @@ namespace Project.Sound
 	public class SliderSound : MonoBehaviour
 	{
 		[SerializeField] protected AudioData _audioData;
+		[SerializeField] protected SoundType _soundType = SoundType.SFX;
 		[Range(0, 1)]
 		[SerializeField] private float _volume = 1;
 		[Tooltip("If true, the sound will play even if the sound type is muted.")]
@@ -83,7 +84,7 @@ namespace Project.Sound
 
 		private float GetVolume()
 		{
-			return _volume * (_ignoreMuted ? AudioSystem.GetVolumeIgnoreMuted(_audioData.SoundType) : AudioSystem.GetVolume(_audioData.SoundType));
+			return _volume * (_ignoreMuted ? AudioSystem.GetVolumeIgnoreMuted(_soundType) : AudioSystem.GetVolume(_soundType));
 		}
 	}
 }

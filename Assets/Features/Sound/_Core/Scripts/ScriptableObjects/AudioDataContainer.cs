@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Project.Sound
 {
-	[CreateAssetMenu(fileName = "AudioDataContainer", menuName = "Scriptable Objects/Audio System/Audio Data Container")]
+	[CreateAssetMenu(fileName = "AudioDataContainer", menuName = "Scriptable Objects/Sound System/Audio Data Container")]
 	public class AudioDataContainer : AAudioData
 	{
 		[SerializeField] private AudioData[] _audioDatas;

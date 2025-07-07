@@ -5,8 +5,13 @@ namespace Project.Sound
 {
 	public static class AudioSystem
 	{
+		public static event System.Action<SoundType, float> OnChangedVolume;
+		public static event System.Action<SoundType, bool> OnChangedMuted;
+
 		public const int DefaultVolume = 1;
 		public const int DefaultPitch = 1;
+		public const int MaxVolume = 1;
+		public const int MinVolume = 0;
 		public const int MaxPitch = 3;
 		public const int MinPitch = -MaxPitch;
 		private const bool DefaultMuted = false;
@@ -17,6 +22,8 @@ namespace Project.Sound
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
 		private static void Init()
 		{
+			OnChangedVolume = (_, _) => { };
+			OnChangedMuted = (_, _) => { };
 			SetupDefaultVolumes();
 			SetupDefaultMuted();
 		}
@@ -24,6 +31,12 @@ namespace Project.Sound
 		public static void SetVolume(SoundType soundType, float volume)
 		{
 			_volumeLevels[soundType] = Mathf.Clamp01(volume);
+			OnChangedVolume.Invoke(soundType, volume);
+		}
+
+		public static float GetVolume(AudioData audioData)
+		{
+			return GetVolume(audioData.SoundType) * audioData.Volume;
 		}
 
 		public static float GetVolume(SoundType soundType)
@@ -39,6 +52,7 @@ namespace Project.Sound
 		public static void SetMuted(SoundType soundType, bool isMuted)
 		{
 			_muted[soundType] = isMuted;
+			OnChangedMuted.Invoke(soundType, isMuted);
 		}
 
 		public static bool IsMute(SoundType soundType)
@@ -89,9 +103,9 @@ namespace Project.Sound
 			PlaySoundOneShot(audioData, Vector3.zero, volume, ignoreMuted);
 		}
 
-		public static void PlaySound(AudioData audioData, AudioSource audioSource, float volume = DefaultVolume, bool ignoreMuted = false)
+		public static void PlaySound(AudioData audioData, AudioSource audioSource, bool ignoreMuted = false)
 		{
-			PlaySound(audioData.AudioClip, audioData.SoundType, audioSource, GetRandomPitch(audioData.Pitch, audioData.PitchDeviation), volume, ignoreMuted);
+			PlaySound(audioData.AudioClip, audioData.SoundType, audioSource, GetRandomPitch(audioData.Pitch, audioData.PitchDeviation), audioData.Volume, ignoreMuted);
 		}
 
 		private static void SetupDefaultVolumes()
