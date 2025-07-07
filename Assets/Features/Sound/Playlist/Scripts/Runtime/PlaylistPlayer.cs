@@ -16,6 +16,7 @@ namespace Project.Sound.Playlist
 				 "If set to false, it will stop playing when it reaches the end of the playlist.\n\n" +
 				 "Note: Only applicable in transition.")]
 		[SerializeField] private bool _loop = true;
+		[SerializeField] private bool _playOnEnable = true;
 		private State _currentState = State.None;
 		private List<AudioData> _currentAudioDatas;
 		private int _currentIndex = -1;
@@ -89,10 +90,21 @@ namespace Project.Sound.Playlist
 		}
 #endif
 
+		private void Reset()
+		{
+			_audioSource = GetComponentInChildren<AudioSource>();
+		}
+
 		private void Awake()
 		{
 			AudioSystem.OnChangedVolume += AudioSystem_OnChangedVolume;
 			AudioSystem.OnChangedMuted += AudioSystem_OnChangedMuted;
+		}
+
+		private void OnEnable()
+		{
+			if (_playOnEnable)
+				Play();
 		}
 
 		private void Update()
