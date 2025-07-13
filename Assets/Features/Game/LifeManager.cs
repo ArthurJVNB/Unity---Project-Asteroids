@@ -19,8 +19,15 @@ namespace Project
 		[SerializeField] private IntEventData _lifesChangedEvent;
 
 		private bool _isGameOver;
+		private int _maxLifes;
 
 		public int Lifes => _lifes;
+		public int MaxLifes => _maxLifes;
+
+		private void Awake()
+		{
+			_maxLifes = _lifes;
+		}
 
 		private void OnEnable()
 		{

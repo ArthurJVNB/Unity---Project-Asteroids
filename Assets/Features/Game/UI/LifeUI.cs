@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Project
@@ -7,12 +8,16 @@ namespace Project
 	public class LifeUI : MonoBehaviour
 	{
 		[SerializeField] private RectTransform _content;
-		[SerializeField] private RectTransform _template;
+		[SerializeField] private LifeSprite _template;
 		[Space]
 		[SerializeField] private LifeManager _lifeManager;
 		[SerializeField] private IntEventData _lifesChangedEvent;
 
-		private List<RectTransform> _activeObjects;
+		[Obsolete]
+		private List<GameObject> _activeObjectsObsolete;
+		private List<LifeSprite> _objects;
+
+		private int ActiveObjectsCount => _objects?.Count(v => v.IsActive) ?? 0;
 
 		private void OnEnable()
 		{
@@ -33,23 +38,47 @@ namespace Project
 
 		private void UpdateLifeUI(int lifes)
 		{
-			_activeObjects ??= new();
-			if (_activeObjects.Count == lifes) return;
+			_objects ??= new();
+			if (ActiveObjectsCount == lifes) return;
 
-			ClearActiveObjects();
+			int maxLifes = _lifeManager.MaxLifes;
+			TryInstantiateObjects(maxLifes);
+			for (int i = 0; i < maxLifes; i++)
+				_objects[i].IsActive = i < lifes;
+		}
+
+		private void TryInstantiateObjects(int count)
+		{
+			int addObjects = count - _objects.Count;
+			for (int i = 0; i < addObjects; i++)
+			{
+				var item = Instantiate(_template, _content);
+				item.gameObject.SetActive(true);
+				_objects.Add(item);
+			}
+		}
+
+		[Obsolete]
+		private void UpdateLifeUIObsolete(int lifes)
+		{
+			_activeObjectsObsolete ??= new();
+			if (_activeObjectsObsolete.Count == lifes) return;
+
+			ClearActiveObjectsObsolete();
 			for (int i = 0; i < lifes; i++)
 			{
 				var item = Instantiate(_template, _content);
 				item.gameObject.SetActive(true);
-				_activeObjects.Add(item);
+				_activeObjectsObsolete.Add(item.gameObject);
 			}
 		}
 
-		private void ClearActiveObjects()
+		[Obsolete]
+		private void ClearActiveObjectsObsolete()
 		{
-			foreach (var item in _activeObjects)
+			foreach (var item in _activeObjectsObsolete)
 				Destroy(item.gameObject);
-			_activeObjects.Clear();
+			_activeObjectsObsolete.Clear();
 		}
 	}
 }
