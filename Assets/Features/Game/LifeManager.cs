@@ -20,6 +20,8 @@ namespace Project
 
 		private bool _isGameOver;
 
+		public int Lifes => _lifes;
+
 		private void OnEnable()
 		{
 			_spaceshipDiedEvent.Event += SpaceshipDiedEvent_Event;
